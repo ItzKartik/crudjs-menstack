@@ -1,17 +1,19 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const url = 'mongodb://localhost/HariDB'
+const url = 'mongodb://localhost/AlienDB'
 const app = express()
 
-mongoose.connect(url, {newNewUrlParser:true})
+mongoose.connect(url, { newNewUrlParser: true })
 const con = mongoose.connection
 
 con.on('open', () => {
-    console.log('Hari Bol...')
+    console.log('Database Connected')
 })
 
-const hariRouter = require('./routes/hari.js')
-app.use('/hari', hariRouter)
+app.use(express.json())
+
+const alienRouter = require('./routes/aliens')
+app.use('/aliens', alienRouter)
 
 app.listen(9000, () => {
     console.log('Server Started')
